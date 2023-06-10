@@ -21,8 +21,9 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            /* Phone number is a string because it can contain non-numeric characters */
             'phone_number' => ['required', 'string', 'max:255', Rule::unique(User::class)],
+            'avatar' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',

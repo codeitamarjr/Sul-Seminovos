@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            /* Phone number is a string because it can contain non-numeric characters */
             $table->string('phone_number')->unique();
+            $table->string('avatar')->nullable();
+            $table->string('address')->nullable();
+            $table->string('fb_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
