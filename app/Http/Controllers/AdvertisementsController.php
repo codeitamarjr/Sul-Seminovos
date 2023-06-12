@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Advertisements;
 use App\Http\Requests\AdvertisementsFormRequest;
 use App\Http\Requests\AdvertisementsUpdateRequest;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class AdvertisementsController extends Controller
 {
@@ -60,9 +61,12 @@ class AdvertisementsController extends Controller
      */
     public function edit(Advertisements $ad)
     {
-        if ($ad->user_id != auth()->user()->id) {
-            return redirect()->route('ads.index')->with('error', 'Você não tem permissão para editar este anúncio!');
+        try {
+            $this->authorize('edit-ad', $ad);
+        } catch (AuthorizationException $e) {
+            throw new AuthorizationException('Você não tem permissão para editar este anúncio!');
         }
+
         return view('ads.edit', compact('ad'));
     }
 
@@ -71,8 +75,10 @@ class AdvertisementsController extends Controller
      */
     public function update(AdvertisementsUpdateRequest $request, Advertisements $ad)
     {
-        if ($ad->user_id != auth()->user()->id) {
-            return redirect()->route('ads.index')->with('error', 'Você não tem permissão para editar este anúncio!');
+        try {
+            $this->authorize('edit-ad', $ad);
+        } catch (AuthorizationException $e) {
+            throw new AuthorizationException('Você não tem permissão para editar este anúncio!');
         }
 
         $data = $request->validated();
@@ -80,14 +86,17 @@ class AdvertisementsController extends Controller
         // Fix decimal separator
         $price = str_replace(',', '.', $request->price);
         $data['price'] = $price;
+        // Add date to the published_date field
+        $data['published'] = 1;
+        $data['published_date'] = date('Y-m-d');
 
         $ad = Advertisements::findOrFail($ad->id);
 
-
-
-        $ad->update($data);
-
-        return redirect()->route('ads.index')->with('success', 'Anúncio atualizado com sucesso!');
+        if ($ad->update($data)) {
+            return redirect()->route('ads.index')->with('success', 'Anúncio atualizado com sucesso!');
+        } else {
+            return redirect()->route('ads.index')->with('error', 'Erro ao atualizar o anúncio!');
+        }
     }
 
     /**

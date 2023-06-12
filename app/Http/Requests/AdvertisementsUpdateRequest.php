@@ -21,7 +21,6 @@ class AdvertisementsUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('advertisements');
         return [
             'car_year_reg' => 'required|string|min:4|max:4',
             'price' => 'required|string|min:2|max:255',

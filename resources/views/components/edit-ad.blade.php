@@ -1,5 +1,9 @@
 <!-- JQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+{{-- <script src="{{ asset('jquery-3.7.0.min.js') }}"></script> --}}
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 
 <!-- CSS -->
@@ -55,8 +59,7 @@
             <div class="col">
                 <label for="price">Preço para anunciar em reais:</label>
                 <input type="text" class="form-control @error('price') is-invalid @enderror" id="price"
-                    name="price"
-                    value="{{ $ad->price ? number_format($ad->price, 2, ',', '.') : old('price') }}">
+                    name="price" value="{{ $ad->price ? number_format($ad->price, 2, ',', '.') : old('price') }}">
                 @error('price')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -187,8 +190,8 @@
         <hr>
 
         <div class="form-group">
-            <label for="confirm" class="form-label">Confirmar</label>
-            <button type="submit" class="form-control btn btn-primary">Salvar</button>
+            <label for="confirm" class="form-label">Salvar Alterações</label>
+            <button type="submit" class="form-control btn btn-primary">Finalizar Anúncio</button>
         </div>
 
 </form>

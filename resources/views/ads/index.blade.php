@@ -3,30 +3,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-
-                <div class="card">
-                    <div class="card-body">
-                        <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}"
-                            class="d-block img-thumbnail mx-auto" width="130">
-                        <p class="text-center"><b>{{ Auth::user()->name }}</b></p>
-                    </div>
-
-                    <hr style="border:2px solid blue;">
-
-                    <div class="vertical-menu">
-                        <a href="{{ route('ads.index') }}" class="nav-link">Dashboard</a>
-                        <a href="{{ route('ads.index') }}" class="nav-link">Profile</a>
-                        <a href="{{ route('ads.index') }}" class="nav-link">Meus Anúncios</a>
-                        <a href="{{ route('ads.index') }}" class="nav-link">Meus Anúncios</a>
-                        <a href="{{ route('ads.index') }}" class="nav-link">Meus Anúncios</a>
-
-                        <a href="{{ route('ads.create') }}" class="nav-link">Criar Anúncio</a>
-                        <a href="{{ route('ads.index') }}" class="nav-link">Meus Anúncios</a>
-                    </div>
-                </div>
+                @include('sidebar')
             </div>
 
             <div class="col-md-9">
+                @include('backend.inc.message')
                 <div class="card">
                     <div class="card-header">
                         Meus Anúncios
@@ -40,6 +21,7 @@
                                         <th></th>
                                         <th>Veículo</th>
                                         <th>Preço</th>
+                                        <th>Status</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -65,12 +47,23 @@
                                             <td>{{ $ad->fipe_model }}</td>
                                             <td>R$ {{ number_format($ad->price, 2, ',', '.') }}</td>
                                             <td>
-                                                
+                                                @if ($ad->published == 1)
+                                                    <span class="badge badge-pill text-bg-success">Ativo</span>
+                                                @else
+                                                    <span class="badge badge-pill text-bg-warning">Inativo</span>
+                                                @endif
+                                            <td>
+
                                                 <form action="{{ route('ads.destroy', $ad->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="{{ route('ads.edit', $ad) }}"
-                                                    class="btn btn-primary btn-sm">Concluir Anúncio</a>
+                                                    @if ($ad->published == 1)
+                                                        <a href="{{ route('ads.edit', $ad) }}"
+                                                            class="btn btn-primary btn-sm">Editar</a>
+                                                    @else
+                                                        <a href="{{ route('ads.edit', $ad) }}"
+                                                            class="btn btn-primary btn-sm">Concluir Anúncio</a>
+                                                    @endif
                                                     <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                                                 </form>
                                             </td>
