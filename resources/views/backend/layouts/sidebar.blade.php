@@ -10,13 +10,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                    aria-controls="ui-basic">
+                <a class="nav-link" data-bs-toggle="collapse" href="#ui-category" aria-expanded="false"
+                    aria-controls="ui-category">
                     <i class="mdi mdi-circle-outline menu-icon"></i>
                     <span class="menu-title">Categorias</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="ui-basic">
+                <div class="collapse" id="ui-category">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.category.index') }}">Listar</a>
@@ -27,6 +27,45 @@
                     </ul>
                 </div>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#ui-subcategory" aria-expanded="false"
+                    aria-controls="ui-subcategory">
+                    <i class="mdi mdi-circle-outline menu-icon"></i>
+                    <span class="menu-title">Subcategorias</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-subcategory">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.subcategory.index') }}">Listar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.subcategory.create') }}">Criar</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#ui-childcategory" aria-expanded="false"
+                    aria-controls="ui-childcategory">
+                    <i class="mdi mdi-circle-outline menu-icon"></i>
+                    <span class="menu-title">Categorias Filho</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-childcategory">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.childcategory.index') }}">Listar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.childcategory.create') }}">Criar</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="pages/forms/basic_elements.html">
                     <i class="mdi mdi-view-headline menu-icon"></i>
@@ -61,10 +100,13 @@
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
                         <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a>
+                        <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a>
                         </li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a>
+                        <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2
+                            </a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen
+                            </a>
                         </li>
                     </ul>
                 </div>

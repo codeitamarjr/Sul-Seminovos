@@ -105,7 +105,8 @@
     <script>
         $(document).ready(function() {
             $('#phone_number').inputmask({
-                mask: "(99)9 9999-9999"
+                mask: "(99)9 9999-9999",
+                removeMaskOnSubmit: true
             });
         });
     </script>

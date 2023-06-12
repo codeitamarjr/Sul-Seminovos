@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('childcategories', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('subcategory_id');
             $table->string('name');
             $table->string('slug')->unique();
+            $table->string('image')->nullable();
 
             /* Indexes to speed up searching */
             $table->index('slug');

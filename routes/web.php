@@ -1,8 +1,14 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Dashboard;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FIPEController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\ChildCategoryController;
+use App\Http\Controllers\AdvertisementsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +21,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [MenuController::class, 'menu'])->name('menu');
 
 Route::get('/home', function () {
-    return view('home');
+    return view('index');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])
@@ -28,15 +32,27 @@ Route::middleware(['auth:sanctum', 'verified'])
         Route::get('/', [Dashboard::class, 'index'])->name('index');
     });
 
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::resource('ads', AdvertisementsController::class);
+});
+
 Route::middleware(['auth:sanctum', 'verified'])
     ->prefix('admin')->name('admin.')->group(function () {
         Route::get('/', function () {
             return view('backend.admin.index');
         })->name('index');
-        Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
-        Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
-        Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
-        Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-        Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
-        Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+        Route::resource('category', CategoryController::class);
+        Route::resource('subcategory', SubcategoryController::class);
+        Route::resource('childcategory', ChildCategoryController::class);
     });
+
+/* Available in all views */
+View::composer(['*'], function ($view) {
+    $menus = \App\Models\Category::with('subcategories')->get();
+    $view->with('menus', $menus);
+});
+
+/* FIPE API */
+Route::get('/api/car-models/{brand}', [FIPEController::class, 'getCarModels']);
+Route::get('/api/car-years/{brand}/{model}', [FIPEController::class, 'getCarYears']);
+Route::get('/api/car-details/{brand}/{model}/{year}', [FIPEController::class, 'getCarDetails']);

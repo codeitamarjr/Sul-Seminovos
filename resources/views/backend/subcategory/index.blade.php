@@ -4,7 +4,7 @@
     <div class="main-panel">
         <div class="content-wrapper">
 
-            <h3>Categorias</h3>
+            <h3>Subcategorias</h3>
 
             <div class="row justify-content-center">
                 <div class="col">
@@ -18,43 +18,48 @@
                                         <tr>
                                             <th></th>
                                             <th>Categorias</th>
+                                            <th>Subategorias</th>
                                             <th>Atalho(Slug)</th>
                                             <th>Ação</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($categories as $category)
+                                        @foreach ($subcategories as $subcategory)
                                             <tr>
-                                                <td><img src="{{ Storage::url('categories/' . $category->image) }}"
-                                                        width="100">
-                                                </td>
-                                                <td>{{ $category->name }}</td>
-                                                <td>{{ $category->slug }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.category.edit', $category->id) }}"
+                                                    @if ($subcategory->image)
+                                                        <img src="{{ Storage::url('categories/subcategories/' . $subcategory->image) }}"
+                                                            width="100">
+                                                    @endif
+                                                </td>
+                                                <td>{{ $subcategory->category->name }}</td>
+                                                <td>{{ $subcategory->name }}</td>
+                                                <td>{{ $subcategory->slug }}</td>
+                                                <td>
+                                                    <a href="{{ route('admin.subcategory.edit', $subcategory->id) }}"
                                                         class="btn btn-info">Editar</a>
-                                                    <a href="#deleteModal{{ $category->id }}" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal{{ $category->id }}"
+                                                    <a href="#deleteModal{{ $subcategory->id }}" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal{{ $subcategory->id }}"
                                                         class="btn btn-danger">Apagar</a>
                                                 </td>
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="deleteModal{{ $category->id }}" tabindex="-1"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="deleteModal{{ $subcategory->id }}"
+                                                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Deletar
                                                                     Categoria
-                                                                    {{ $category->name }}
+                                                                    {{ $subcategory->name }}
                                                                 </h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 Você tem certeza que deseja deletar a categoria
-                                                                {{ $category->name }}?<br>
+                                                                {{ $subcategory->name }}?<br>
                                                                 <span class="text-danger">Todos os produtos
                                                                     relacionados a esta categoria serão deletados
                                                                     também! Esta ação não pode ser desfeita!</span>
@@ -63,7 +68,7 @@
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
                                                                 <form
-                                                                    action="{{ route('admin.category.destroy', $category->id) }}"
+                                                                    action="{{ route('admin.subcategory.destroy', $subcategory->id) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')

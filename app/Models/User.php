@@ -43,4 +43,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /* Relationships with advertisements */
+    public function ads()
+    {
+        return $this->hasMany(Advertisements::class);
+    }
 }

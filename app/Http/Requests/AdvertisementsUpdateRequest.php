@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryFormRequest extends FormRequest
+class AdvertisementsUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +21,14 @@ class CategoryFormRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('advertisements');
         return [
-            'name' => 'required|string|min:2|max:255|unique:categories,name',
-            'slug' => 'required|string|min:2|max:255|unique:categories,slug',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5024',
+            'car_year_reg' => 'required|string|min:4|max:4',
+            'price' => 'required|string|min:2|max:255',
+            'is_negotiable' => 'required|string|max:255',
+            'car_mileage' => 'required|string|min:2|max:255',
+            'car_color' => 'required|string|min:2|max:255',
+            'description' => 'nullable|string|min:2|max:255',
         ];
     }
 }

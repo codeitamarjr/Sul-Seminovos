@@ -4,7 +4,7 @@
     <div class="main-panel">
         <div class="content-wrapper">
 
-            <h3>Categorias</h3>
+            <h3>Categorias Filhos</h3>
 
             <div class="row justify-content-center">
                 <div class="col">
@@ -18,43 +18,50 @@
                                         <tr>
                                             <th></th>
                                             <th>Categorias</th>
+                                            <th>Subategorias</th>
+                                            <th>Categoria Filho</th>
                                             <th>Atalho(Slug)</th>
                                             <th>Ação</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($categories as $category)
+                                        @foreach ($childcategories as $childcategory)
                                             <tr>
-                                                <td><img src="{{ Storage::url('categories/' . $category->image) }}"
-                                                        width="100">
-                                                </td>
-                                                <td>{{ $category->name }}</td>
-                                                <td>{{ $category->slug }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.category.edit', $category->id) }}"
+                                                    @if ($childcategory->image)
+                                                        <img src="{{ Storage::url('subcategories/' . $childcategory->image) }}"
+                                                            width="100">
+                                                    @endif
+                                                </td>
+                                                <td>{{ $childcategory->category->name }}</td>
+                                                <td>{{ $childcategory->subcategory->name }}</td>
+                                                <td>{{ $childcategory->name }}</td>
+                                                <td>{{ $childcategory->slug }}</td>
+                                                <td>
+                                                    <a href="{{ route('admin.childcategory.edit', $childcategory->id) }}"
                                                         class="btn btn-info">Editar</a>
-                                                    <a href="#deleteModal{{ $category->id }}" data-bs-toggle="modal"
-                                                        data-bs-target="#deleteModal{{ $category->id }}"
+                                                    <a href="#deleteModal{{ $childcategory->id }}" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal{{ $childcategory->id }}"
                                                         class="btn btn-danger">Apagar</a>
                                                 </td>
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="deleteModal{{ $category->id }}" tabindex="-1"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="deleteModal{{ $childcategory->id }}"
+                                                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Deletar
                                                                     Categoria
-                                                                    {{ $category->name }}
+                                                                    {{ $childcategory->name }}
                                                                 </h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 Você tem certeza que deseja deletar a categoria
-                                                                {{ $category->name }}?<br>
+                                                                {{ $childcategory->name }}?<br>
                                                                 <span class="text-danger">Todos os produtos
                                                                     relacionados a esta categoria serão deletados
                                                                     também! Esta ação não pode ser desfeita!</span>
@@ -63,7 +70,7 @@
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
                                                                 <form
-                                                                    action="{{ route('admin.category.destroy', $category->id) }}"
+                                                                    action="{{ route('admin.childcategory.destroy', $childcategory->id) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')

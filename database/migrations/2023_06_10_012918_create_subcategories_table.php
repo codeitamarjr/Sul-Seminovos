@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('name');
             $table->string('slug')->unique();
+            $table->string('image')->nullable();
 
             /* Indexes to speed up searching */
             $table->index('slug');

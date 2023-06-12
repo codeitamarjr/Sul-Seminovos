@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CategoryFormRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 
 class CategoryController extends Controller
 {
@@ -32,22 +33,25 @@ class CategoryController extends Controller
      */
     public function store(CategoryFormRequest $request)
     {
+
+        $category = Category::create(
+            [
+                'name' => $request->name,
+                'slug' => $request->slug,
+            ]
+        );
+
         if ($request->file('image')) {
             Storage::putFile(
                 'public/categories',
                 $request->file('image')
             );
+            $category->image = $request->file('image')->hashName();
+            $category->save();
         }
-        Category::create(
-            [
-                'name' => $request->name,
-                'slug' => $request->slug,
-                'image' => $request->file('image')->hashName(),
-            ]
-        );
 
         return redirect()->route('admin.category.index')
-            ->with('success', 'Category created successfully.');
+            ->with('success', 'Categoria criada com sucesso.');
     }
 
     /**
@@ -71,7 +75,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryUpdateRequest $request, string $id)
     {
         $category = Category::findOrFail($id);
 
@@ -109,6 +113,6 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('admin.category.index')
-            ->with('success', 'Category deleted successfully.');
+            ->with('success', 'Categoria deletada com sucesso.');
     }
 }

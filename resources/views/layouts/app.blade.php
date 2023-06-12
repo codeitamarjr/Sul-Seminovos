@@ -81,16 +81,23 @@
         {{-- Inicio da segunda navbar --}}
 
         <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Carros</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Motos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Serviços</a>
-            </li>
+            @foreach ($menus as $menu)
+                <a id="navbarDropdown{{ $menu->id }}" class="nav-link" href="#" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    {{ $menu->name }}
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown{{ $menu->id }}">
+                    @foreach ($menu->subcategories as $submenu)
+                        <a class="dropdown-item" href="#">
+                            {{ $submenu->name }}
+                        </a>
+                    @endforeach
+                </div>
+            @endforeach
         </ul>
+
+
 
 
 
