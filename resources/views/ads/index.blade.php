@@ -53,18 +53,52 @@
                                                 @endif
                                             <td>
 
-                                                <form action="{{ route('ads.destroy', $ad->id) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    @if ($ad->published == 1)
-                                                        <a href="{{ route('ads.edit', $ad) }}"
-                                                            class="btn btn-primary btn-sm">Editar</a>
-                                                    @else
-                                                        <a href="{{ route('ads.edit', $ad) }}"
-                                                            class="btn btn-primary btn-sm">Concluir Anúncio</a>
-                                                    @endif
-                                                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                                                </form>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="deleteModal" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                    Excluir Anúncio
+                                                                </h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Você tem certeza que deseja excluir este anúncio?<br>
+                                                                <small>Esta ação não poderá ser desfeita.</small>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form action="{{ route('ads.destroy', $ad->id) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="button" class="btn btn-secondary btn-sm"
+                                                                        data-bs-dismiss="modal">
+                                                                        Cancelar</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger btn-sm">Excluir</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                @if ($ad->published == 1)
+                                                    <a href="{{ route('ads.edit', $ad) }}"
+                                                        class="btn btn-primary btn-sm">Editar</a>
+                                                @else
+                                                    <a href="{{ route('ads.edit', $ad) }}"
+                                                        class="btn btn-primary btn-sm">Concluir Anúncio</a>
+                                                @endif
+                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#deleteModal">
+                                                    Excluir Anúncio
+                                                </button>
+
+
                                             </td>
                                         </tr>
                                     @endforeach
