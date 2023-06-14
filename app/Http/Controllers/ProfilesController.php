@@ -61,7 +61,7 @@ class ProfilesController extends Controller
         try {
             $this->authorize('edit-profile', $profile);
         } catch (AuthorizationException $e) {
-            throw new AuthorizationException('Você não tem permissão para editar este anúncio!');
+            throw new AuthorizationException('Você não tem permissão para editar este profile!');
         }
 
         return view('profiles.edit', [
@@ -77,7 +77,7 @@ class ProfilesController extends Controller
         try {
             $this->authorize('edit-profile', $profile);
         } catch (AuthorizationException $e) {
-            throw new AuthorizationException('Você não tem permissão para editar este anúncio!');
+            throw new AuthorizationException('Você não tem permissão para editar este profile!');
         }
 
         $profile->update($request->validated());
@@ -88,8 +88,12 @@ class ProfilesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Profiles $profiles)
+    public function destroy(Profiles $profile)
     {
-        //
+        try {
+            $this->authorize('edit-profile', $profile);
+        } catch (AuthorizationException $e) {
+            throw new AuthorizationException('Você não tem permissão para editar este profile!');
+        }
     }
 }

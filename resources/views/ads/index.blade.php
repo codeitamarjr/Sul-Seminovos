@@ -54,7 +54,7 @@
                                             <td>
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="deleteModal" tabindex="-1"
+                                                <div class="modal fade" id="deleteModal{{ $ad->id }}" tabindex="-1"
                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
@@ -67,6 +67,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 Você tem certeza que deseja excluir este anúncio?<br>
+                                                                Veículo {{ $ad->fipe_model }}<br>
                                                                 <small>Esta ação não poderá ser desfeita.</small>
                                                             </div>
                                                             <div class="modal-footer">
@@ -94,7 +95,7 @@
                                                         class="btn btn-primary btn-sm">Concluir Anúncio</a>
                                                 @endif
                                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteModal">
+                                                    data-bs-target="#deleteModal{{ $ad->id }}">
                                                     Excluir Anúncio
                                                 </button>
 

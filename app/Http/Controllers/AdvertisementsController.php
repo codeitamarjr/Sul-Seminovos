@@ -108,8 +108,10 @@ class AdvertisementsController extends Controller
      */
     public function destroy(Advertisements $ad)
     {
-        if ($ad->user_id != auth()->user()->id) {
-            return redirect()->route('ads.index')->with('error', 'Você não tem permissão para excluir este anúncio!');
+        try {
+            $this->authorize('edit-ad', $ad);
+        } catch (AuthorizationException $e) {
+            throw new AuthorizationException('Você não tem permissão para editar este anúncio!');
         }
         $ad = Advertisements::findOrFail($ad->id);
         $ad->delete();
