@@ -1,10 +1,6 @@
 <form action="{{ route('ads.store') }}" method="POST">
     @csrf
 
-    <div class="alert alert-primary" role="alert">
-        Para começar, vamos adicionar um carro a sua conta!
-    </div>
-
     <div class="form-group">
         <div class="row">
             <div class="col">

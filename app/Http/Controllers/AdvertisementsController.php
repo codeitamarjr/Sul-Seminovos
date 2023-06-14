@@ -25,6 +25,10 @@ class AdvertisementsController extends Controller
      */
     public function create()
     {
+        /* If the user doesn't have a profile, redirect to the profile creation page, before creating an ad */
+        if (!auth()->user()->profiles) {
+            return redirect()->route('profiles.create')->with('error', 'Você precisa criar e completar um perfil antes de criar um anúncio!');
+        }
         $menus = Category::with('subcategories')->get();
         return view('ads.create', compact('menus'));
     }
@@ -45,7 +49,7 @@ class AdvertisementsController extends Controller
 
         $ad = Advertisements::create($data);
 
-        return redirect()->route('ads.index')->with('success', 'Anúncio criado com sucesso!');
+        return redirect()->route('ads.edit', $ad->id)->with('success', 'Veículo cadastrado com sucesso! Agora você pode adicionar os detalhes do seu veículo para finalizar o anúncio.');
     }
 
     /**

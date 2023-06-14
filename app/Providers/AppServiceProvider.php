@@ -23,5 +23,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('edit-ad', function ($user, $ad) {
             return $user->id === $ad->user_id;
         });
+
+        Gate::define('edit-profile', function ($user, $profiles) {
+            return $user->id === $profiles->user_id;
+        });
     }
 }

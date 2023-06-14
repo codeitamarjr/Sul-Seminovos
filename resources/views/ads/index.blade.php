@@ -7,7 +7,6 @@
             </div>
 
             <div class="col-md-9">
-                @include('backend.inc.message')
                 <div class="card">
                     <div class="card-header">
                         Meus Anúncios
@@ -78,26 +77,4 @@
             </div>
         </div>
     </div>
-
-    <style>
-        .vertical-menu a {
-            width: 100%;
-            height: 100%;
-            overflow-y: auto;
-            color: black;
-            text-decoration: none;
-            display: block;
-            padding: 12px;
-            background-color: #eee;
-        }
-
-        .vertical-menu a:hover {
-            background-color: #ccc;
-        }
-
-        .vertical-menu a.active {
-            background-color: blue;
-            color: white;
-        }
-    </style>
 @endsection

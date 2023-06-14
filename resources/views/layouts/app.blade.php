@@ -96,6 +96,7 @@
                 </div>
             @endforeach
         </ul>
+        @include('backend.inc.message')
 
 
 
