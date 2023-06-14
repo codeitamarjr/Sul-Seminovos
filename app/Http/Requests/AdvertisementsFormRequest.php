@@ -23,6 +23,7 @@ class AdvertisementsFormRequest extends FormRequest
     {
         return [
             'category_id' => 'required|integer|exists:categories,id',
+            'subcategory_id' => 'required|integer|exists:subcategories,id',
             'condition' => 'required|string|max:255',
             'car_brand' => 'required|int',
             'car_model' => 'required|int',

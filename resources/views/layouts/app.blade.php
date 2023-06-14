@@ -82,14 +82,15 @@
 
         <ul class="nav justify-content-center">
             @foreach ($menus as $menu)
-                <a id="navbarDropdown{{ $menu->id }}" class="nav-link" href="#" data-bs-toggle="dropdown"
+                <a id="navbarDropdown{{ $menu->id }}" class="nav-link btn" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     {{ $menu->name }}
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown{{ $menu->id }}">
                     @foreach ($menu->subcategories as $submenu)
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item"
+                            href="{{ route('subcategory.index', [$menu->slug, $submenu->slug]) }}">
                             {{ $submenu->name }}
                         </a>
                     @endforeach

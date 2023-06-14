@@ -96,7 +96,7 @@
                                                 @endif
                                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal{{ $ad->id }}">
-                                                    Excluir Anúncio
+                                                    Excluir
                                                 </button>
 
 

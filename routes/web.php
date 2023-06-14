@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\ChildCategoryController;
 use App\Http\Controllers\AdvertisementsController;
+use App\Http\Controllers\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ use App\Http\Controllers\AdvertisementsController;
 /* MENU Available in all views */
 
 View::composer(['*'], function ($view) {
-    $menus = Category::with('subcategories')->get();
+    $menus = Category::with('subcategories', 'subcategories')->get();
     $view->with('menus', $menus);
 });
 
@@ -39,6 +40,10 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('index');
 });
+
+/* Define Category route */
+Route::get('/categoria/{category:slug}', [FrontendController::class, 'index'])->name('category.show');
+Route::get('/categoria/{category:slug}/{subcategory:slug}', [FrontendController::class, 'subcategory'])->name('subcategory.index');
 
 // /* Define User Dashboard route */
 // Route::middleware(['auth:sanctum', 'verified'])

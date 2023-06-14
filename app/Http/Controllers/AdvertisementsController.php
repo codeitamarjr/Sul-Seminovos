@@ -29,7 +29,7 @@ class AdvertisementsController extends Controller
         if (!auth()->user()->profiles) {
             return redirect()->route('profiles.create')->with('error', 'Você precisa criar e completar um perfil antes de criar um anúncio!');
         }
-        $menus = Category::with('subcategories')->get();
+        $menus = Category::with('subcategories', 'subcategories')->get();
         return view('ads.create', compact('menus'));
     }
 

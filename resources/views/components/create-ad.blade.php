@@ -13,6 +13,17 @@
                 </select>
             </div>
             <div class="col">
+                <label for="subcategory_id">Subcategoria</label>
+                <select class="form-control @error('subcategory_id') is-invalid @enderror" id="subcategory_id"
+                    name="subcategory_id">
+                    @foreach ($menus as $category)
+                        @foreach ($category->subcategories as $subcategory)
+                            <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                        @endforeach
+                    @endforeach
+                </select>
+            </div>
+            <div class="col">
                 <label for="condition">Condição</label>
                 <select class="form-control @error('condition') is-invalid @enderror" id="condition" name="condition">
                     <option value="1">Usado</option>
@@ -91,7 +102,8 @@
                     </div>
                     <div class="col">
                         <label for="SiglaCombustivel">Sigla Combustível</label>
-                        <input type="text" id="SiglaCombustivel" name="fipe_fuel_code" class="form-control" readonly>
+                        <input type="text" id="SiglaCombustivel" name="fipe_fuel_code" class="form-control"
+                            readonly>
                     </div>
                 </div>
             </div>
