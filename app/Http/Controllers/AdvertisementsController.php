@@ -84,17 +84,12 @@ class AdvertisementsController extends Controller
         } catch (AuthorizationException $e) {
             throw new AuthorizationException('Você não tem permissão para editar este anúncio!');
         }
-
+        $ad = Advertisements::findOrFail($ad->id);
         $data = $request->validated();
 
         // Fix decimal separator
         $price = str_replace(',', '.', $request->price);
         $data['price'] = $price;
-        // Add date to the published_date field
-        $data['published'] = 1;
-        $data['published_date'] = date('Y-m-d');
-
-        $ad = Advertisements::findOrFail($ad->id);
 
         if ($ad->update($data)) {
             if ($ad->features()->doesntExist()) {

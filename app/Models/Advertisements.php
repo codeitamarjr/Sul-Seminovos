@@ -69,4 +69,9 @@ class Advertisements extends Model
     {
         return $this->hasOne(Features::class, 'advertisement_id', 'id');
     }
+
+    public function extras()
+    {
+        return $this->hasOne(Extras::class, 'advertisement_id', 'id');
+    }
 }

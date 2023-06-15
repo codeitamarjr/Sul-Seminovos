@@ -36,10 +36,11 @@ class FeaturesController extends Controller
         if (auth()->user()->ads()->where('id', $data['advertisement_id'])->doesntExist()) {
             throw new AuthorizationException('Você não tem permissão para adicionar recursos a este anúncio!');
         }
+        $ad = Advertisements::find($data['advertisement_id']);
 
         Features::create($data);
 
-        return redirect()->back()->with('success', 'Opcionais adicionados com sucesso!');
+        return redirect()->route('extras.create', $ad->id)->with('success', 'Opcionais adicionados com sucesso! Agora vamos adicionar os extras.');
     }
 
     /**
@@ -67,9 +68,10 @@ class FeaturesController extends Controller
         if (auth()->user()->ads()->where('id', $feature->advertisement_id)->doesntExist()) {
             throw new AuthorizationException('Você não tem permissão para editar recursos deste anúncio!');
         }
+        $ad = Advertisements::where('id', $feature->advertisement_id)->first();
         $data = $request->validated();
         $feature->update($data);
-        return redirect()->back()->with('success', 'Opcionais atualizados com sucesso!');
+        return redirect()->route('extras.create', $ad->id)->with('success', 'Opcionais adicionados com sucesso! Agora vamos adicionar os extras.');
     }
 
     /**

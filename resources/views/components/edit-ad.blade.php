@@ -6,12 +6,6 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 
-<!-- CSS -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-<!-- JS -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
 @if ($errors->any())
     <div class="alert alert-danger" role="alert">
         <strong>Ops!</strong> Verifique os erros abaixo:<br>
@@ -159,23 +153,6 @@
 
     <hr>
 
-    <div class="form-group">
-        <label for="extra" class="form-label">Destaques</label>
-        <select class="form-control" id="extra" name="extra[]" multiple="multiple">
-            <option value="1">Único Dono</option>
-            <option value="2">IPVA Pago</option>
-            <option value="3">Não aceito troca</option>
-            <option value="4">Veículo financiado</option>
-            <option value="5">Licenciado</option>
-            <option value="6">Garantia de Fábrica</option>
-            <option value="7">Veículo de Colecionador</option>
-            <option value="8">Todas as revisões em concessionária</option>
-            <option value="9">Adaptada para pessoas com deficiência</option>
-        </select>
-    </div>
-
-    <hr>
-
     <script>
         // Inputmask for price and mileage
         $(document).ready(function() {
@@ -202,20 +179,6 @@
                 rightAlign: false,
                 removeMaskOnSubmit: true,
                 suffix: ' KM'
-            });
-        });
-
-        // Select2 for features
-        $(document).ready(function() {
-            $('#features').select2({
-                tokenSeparators: [',', ' ']
-            });
-        });
-
-        // Select2 for extra
-        $(document).ready(function() {
-            $('#extra').select2({
-                tokenSeparators: [',', ' ']
             });
         });
     </script>

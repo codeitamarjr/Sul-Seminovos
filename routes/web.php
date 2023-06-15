@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\ChildCategoryController;
 use App\Http\Controllers\AdvertisementsController;
+use App\Http\Controllers\ExtraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('ads', AdvertisementsController::class);
     Route::resource('features', FeaturesController::class);
     Route::get('/features/create/{ad}', [FeaturesController::class, 'create'])->name('features.create');
+    Route::resource('extras', ExtraController::class);
+    Route::get('/extras/create/{ad}', [ExtraController::class, 'create'])->name('extras.create');
 });
 
 /* Define ADMIN routes */

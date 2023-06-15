@@ -51,6 +51,8 @@ return new class extends Migration
             $table->string('turn_indicator_on_orvm')->default(false); // Indicador de direção no ORVM(Outside Rear View Mirror ou Espelho retrovisor externo)
             $table->string('usb_and_auxiliary_input')->default(false); // Entrada USB e auxiliar
             $table->string('wheel_covers')->default(false); // Calotas
+
+            $table->foreign('advertisement_id')->references('id')->on('advertisements')->onDelete('cascade');
         });
     }
 
