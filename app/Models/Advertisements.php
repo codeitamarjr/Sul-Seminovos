@@ -64,4 +64,9 @@ class Advertisements extends Model
     {
         return $this->hasOne(Subcategory::class, 'id', 'subcategory_id');
     }
+
+    public function features()
+    {
+        return $this->hasOne(Features::class, 'advertisement_id', 'id');
+    }
 }

@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FIPEController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FeaturesController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\ChildCategoryController;
 use App\Http\Controllers\AdvertisementsController;
-use App\Http\Controllers\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,8 @@ Route::get('/categoria/{category:slug}/{subcategory:slug}', [FrontendController:
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('profiles', ProfilesController::class);
     Route::resource('ads', AdvertisementsController::class);
+    Route::resource('features', FeaturesController::class);
+    Route::get('/features/create/{ad}', [FeaturesController::class, 'create'])->name('features.create');
 });
 
 /* Define ADMIN routes */

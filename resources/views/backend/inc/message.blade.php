@@ -29,3 +29,13 @@
         </div>
     </div>
 @endif
+@if (Session::has('error'))
+    <div class="container">
+        <div class="align-self-center align-content-center">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ Session::get('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+@endif

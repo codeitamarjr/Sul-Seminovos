@@ -16,7 +16,7 @@ class ProfilesController extends Controller
     public function index()
     {
         if (!auth()->user()->profiles) {
-            return redirect()->route('profiles.create')->with('info', 'Você ainda não possui um perfil, crie um para continuar.');
+            return redirect()->route('profiles.create')->with('info', 'Você ainda não concluiu seu cadastro.');
         }
         return view('profiles.index', [
             'profiles' => auth()->user()->profiles,

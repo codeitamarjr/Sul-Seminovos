@@ -216,10 +216,12 @@ return [
         'birth_date' => 'data de nascimento',
         'price' => 'preço',
         'car_mileage' => 'kilometragem',
+        'car_transmission' => 'câmbio',
         'car_color' => 'cor',
         'car_year' => 'ano',
         'car_model' => 'modelo',
         'car_brand' => 'marca',
+        'car_license_plate' => 'placa',
         'postal_code' => 'cep',
 
 

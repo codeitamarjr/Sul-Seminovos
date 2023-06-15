@@ -9,15 +9,20 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        Editar/Concluir Anúncio
+                        Opcionais
                     </div>
                     <div class="card-body">
 
-                        <form action="{{ route('ads.update', ['ad' => $ad->id]) }}" method="POST">
+                        <form
+                            action="{{ route('features.update', [
+                                'feature' => $feature,
+                            ]) }}"
+                            method="POST">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="advertisement_id" value="{{ $feature->advertisement->id }}">
 
-                            <x-edit-ad :ad="$ad" />
+                            <x-feature :features="$feature" />
 
                             <div class="form-group">
                                 <div class="row">
@@ -26,7 +31,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </form>
 
                     </div>

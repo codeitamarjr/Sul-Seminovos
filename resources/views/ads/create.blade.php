@@ -13,7 +13,12 @@
                     </div>
                     <div class="card-body">
 
-                        <x-create-ad />
+                        <form action="{{ route('ads.store') }}" method="POST">
+                            @csrf
+
+                            <x-create-ad />
+
+                        </form>
 
                     </div>
                 </div>

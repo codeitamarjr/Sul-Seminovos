@@ -26,7 +26,9 @@ class AdvertisementsUpdateRequest extends FormRequest
             'price' => 'required|string|min:2|max:255',
             'is_negotiable' => 'required|string|max:255',
             'car_mileage' => 'required|string|min:2|max:255',
+            'car_transmission' => 'required|string|max:255',
             'car_color' => 'required|string|min:2|max:255',
+            'car_license_plate' => 'required|string|min:1|max:255',
             'description' => 'nullable|string|min:2|max:255',
         ];
     }

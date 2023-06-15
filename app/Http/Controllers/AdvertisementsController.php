@@ -27,7 +27,7 @@ class AdvertisementsController extends Controller
     {
         /* If the user doesn't have a profile, redirect to the profile creation page, before creating an ad */
         if (!auth()->user()->profiles) {
-            return redirect()->route('profiles.create')->with('error', 'Você precisa criar e completar um perfil antes de criar um anúncio!');
+            return redirect()->route('profiles.create')->with('error', 'Você precisa completar o seu cadastro antes de criar um anúncio!');
         }
         $menus = Category::with('subcategories', 'subcategories')->get();
         return view('ads.create', compact('menus'));
@@ -97,7 +97,10 @@ class AdvertisementsController extends Controller
         $ad = Advertisements::findOrFail($ad->id);
 
         if ($ad->update($data)) {
-            return redirect()->route('ads.index')->with('success', 'Anúncio atualizado com sucesso!');
+            if ($ad->features()->doesntExist()) {
+                return redirect()->route('features.create', $ad)->with('success', 'Anúncio atualizado com sucesso! Agora você pode adicionar os opcionais do seu veículo.');
+            }
+            return redirect()->route('features.edit', $ad->features->id)->with('success', 'Anúncio atualizado com sucesso! Agora você pode adicionar os opcionais do seu veículo.');
         } else {
             return redirect()->route('ads.index')->with('error', 'Erro ao atualizar o anúncio!');
         }
